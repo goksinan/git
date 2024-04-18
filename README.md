@@ -1,3 +1,3 @@
-Check `undo` for git undo operations
+See `undo` for git undo operations
 
-Check `common` to see some common git commands
+See `common` for some common git commands

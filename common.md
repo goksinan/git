@@ -36,3 +36,34 @@ While `branch` is a pointer that points to a line if changes, `tag` is a pointer
 
 Let's say you have a lot of commits, but at the last commit you noticed a bug. Now, you want to figure out where the bug was introduced and its root cause. You can use `git bisect` to debug the commits and pinpoint to the exact commit when the bug was introduced. This procedure requires to compile commits, run them, and label it as GOOD or BAD commit (has the bug or not)
 
+# 10. `git fetch`
+
+This is to download changes from a remote repository, but in a way safer than the `git pull`.
+Check all branches after fetching a remote branch:
+```
+git fetch origin master
+git branch --all
+
+> * master
+>  remotes/origin/HEAD -> origin/master
+>  remotes/origin/master
+```
+As you see that the local branch remained unchanged, but all the changes from remote branch is copied locally to a new branch called origin/master. After examining the content of of the remote repo, you can merge it into the local branch:
+```
+git merge origin/master
+```
+
+# 11. `git submodule`
+
+Submodules allow you to keep a Git repository as a subdirectory of another Git repository. This lets you clone another repository into your project and keep your commits separate.
+
+When checkout a project that includes git submodules, the submodules are not automatically downloaded with the main project. You have to separately initialize and update those submodules:
+```
+git submodule init
+git submodule update
+```
+
+Fortunately, there is an easier way. You can clone the repository with a --recursive flag to automatically init and update any submodules (and submodules of those submodules ad infinitum) within the cloned repository:
+```
+git clone --recursive <repo>
+``
